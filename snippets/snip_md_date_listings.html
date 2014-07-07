@@ -1,0 +1,60 @@
+<div class="module{if !"{changed}"} margin-9top{/if}">
+     {if "{changed}"}
+    <header class="mobile-grey no-mobile">
+               <h4>{start_of_event format="%l %d.%m.%y"}</h4>
+               <div class="bottom-line"></div>
+    </header>
+    {/if}
+    <div class="aside">  
+        <article class="row green bordered">    
+        {if '{entry_thumbnail}'}
+            <img class="col-sm-2 col-xs-6 no-small" src="{entry_thumbnail}" alt="{title}" title="{title}"/>
+            <div class="padding-blr col-md-4 col-xs-6">
+                <h4 class="h3 small-margin">
+                {if '{segment_2}' == 'education'}<a href="{path='{segment_1}/events/{url_title}'}" class="inherit_colors">{title}</a>
+                {if:else}
+                <a href="{path='{segment_1}/{segment_2}/{url_title}'}" class="inherit_colors">{title}</a>
+                {/if}
+                </h4>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="col-xs-6 higher-then-medium">
+                                <p>   
+                                 {subtitle}
+                                 <!-- {categories show_group="14" backspace="2"}<a style="display=:inline;" href="{homepage}/{segment_1}/{segment_2}/filter/{category_url_title}">{category_name}</a>, {/categories} -->
+                                </p>
+                            </div>
+                            <div class="col-lg-2 col-sm-3 col-xs-6 event-listing">
+                                <p>
+{if '{start_of_event format="%l %d %F %Y"}' == '{end_of_event format="%l %d %F %Y"}'}
+<time datetime="{start_of_event format="%Y-%m-%dT%G:%i+04:00"}">{start_of_event format="%l, %h:%i %a"}&#151;{end_of_event format="%h:%i %a<br/>%d %F %Y"}</time>
+{if:else}                              
+<time datetime="{start_of_event format="%Y-%m-%dT%G:%i+04:00"}">{start_of_event format="%l, %h:%i %a<br/>%d %F %Y"}</time><br />
+—<time datetime="{end_of_event format="%Y-%m-%dT%G:%i+04:00"}">{end_of_event format="%l, %h:%i %a<br/>%d %F %Y"}</time>     
+{/if} 
+                                </p>
+                            </div>
+                            {if "{end_of_event}"}
+                            <div class="col-lg-2 col-sm-3 col-xs-6 event-listing">
+                                <p>
+                                    {location_venue_information}
+                                    {location_venue_information:title}<br />
+                                    {location_venue_information:subtitle}
+                                    {/location_venue_information}
+                                </p>
+                            </div>
+                            {/if}
+                        </div> 
+                        <div class="col-lg-3 lg-only">
+                            {map_module}
+                                <p>{map_module:column_one}</p>
+                            {/map_module}
+                        </div>
+                       </div>   
+                   </div>
+       {if:else}
+                   {snip_listing_without_image}
+       {/if}
+               </article>
+           </div>
+       </div>
