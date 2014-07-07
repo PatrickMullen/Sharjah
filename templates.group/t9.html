@@ -1,0 +1,82 @@
+<!--
+Template: T9
+Used on:
+-->
+
+{preload_replace:channel="{embed:channel}"}
+
+{exp:switchee variable="global:group_id" parse="inward"}	
+	{case value="1|3|6"}
+	{exp:channel:entries
+		channel="{channel}"
+		url_title="{segment_3}"
+		dynamic="off"
+		status="open|closed|draft"
+	}
+	{/case}
+
+	{case default="Yes"}
+	{exp:channel:entries
+		channel="{channel}"
+		url_title="{segment_3}"
+		dynamic="off"
+		status="open"
+	}
+	{/case}
+{/exp:switchee}
+
+	{snip_breadcrumb_with_meta}
+
+	{if "{info_panel}{info_panel:title}{/info_panel}"}
+	{snip_md_info}
+	{/if}
+	
+	{if "{body_content}{body_content:section_title}{/body_content}"}
+	{snip_md_text}
+	{/if}
+
+	{if "{image_array}{image_array:image_title}{/image_array}"}
+		{if '{segment_2}' == 'collection'}
+			{snip_md_collection}
+		{if:else}
+			{snip_md_multi_image}
+		{/if}
+	{/if}
+
+	{if '{tabular_module}{tabular_module:tab_title}{/tabular_module}'}
+	{snip_md_tabs}
+	{/if}
+
+	{if '{video_module}{video_module:video_url}{/video_module}'}
+	{snip_md_video}
+	{/if}
+	
+	{if '{map_module}{map_module:map_url}{/map_module}'}
+	{snip_md_map}
+	{/if}
+
+	{if '{twitter_module}{twitter_module:feed_type}{/twitter_module}'}
+	{snip_md_twitter}
+	{/if}
+
+	{if '{instagram_module}{instagram_module:feed_type}{/instagram_module}'}
+	{snip_md_instagram}
+	{/if}
+
+	{if '{related_content}{related_content:content_title}{/related_content}' OR '{related_content}{related_content:module_title}{/related_content}'}
+		{related_content}
+			{if '{related_content:list_type}' == 'Stacked Items'}
+				{snip_md_related_listing}
+			{/if}
+		
+			{if '{related_content:list_type}' == 'Grid'}
+				{snip_md_related_manual_temp}
+			{/if}
+		{/related_content}
+	{/if}
+
+	{if "{sponsors_module}{sponsors_module:title}{/sponsors_module}"}
+		{snip_md_sponsors}
+	{/if}
+	
+{/exp:channel:entries}
